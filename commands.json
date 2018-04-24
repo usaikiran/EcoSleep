@@ -1,0 +1,11 @@
+{
+    "GET_DISPLAY_PORT" : "xrandr | sed '2!d' | awk '{print $1}'",
+    "SET_BRIGHTNESS" : "xrandr --output #DISPLAY_PORT --brightness ",
+    "GET_BRIGHTNESS":"xrandr --verbose | grep Brightness | awk '{ print $2 }'",
+    "MONITOR_OFF" : "xset -display :0.0 dpms force off",
+    "MONITOR_ON" : "xset -display :0.0 dpms force on",
+    "GET_PROCESS_LIST" : "ps aux | awk '{ print $11 }'",
+    "GET_PROCESS_ID" : "ps aux | grep #PROCESS_NAME | awk '{ print $2 }'",
+    "PAUSE_PROCESS" : "sudo kill -STOP ",
+    "RESUME_PROCESS" : "sudo kill -CONT "
+}
