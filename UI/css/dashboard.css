@@ -1,0 +1,102 @@
+
+body
+{
+    background-color: #222;
+}
+
+.side-bar
+{
+    position: fixed;
+    
+    display: block;
+    width: 50px;
+    height: 100vh;
+
+    background-color: #1A1A1A;
+}
+
+.content-div
+{
+    position: relative;
+    
+    width: calc(100% - 50px);
+    height: 89vh;
+    float: right;
+
+    border: 0px;
+}
+
+.toggle-switch
+{
+    position: relative;
+    
+    display: block;
+    padding: 15px;
+    float: right;
+}
+
+.toggle-state
+{
+    position: relative;
+
+    font-family: monaco;
+    font-size: 13px;
+    letter-spacing: 1px;
+
+    color: #ccc !important;
+    bottom: 11px;
+}
+
+.logo-div
+{
+    position: fixed;
+    
+    display: block;
+    padding: 3px;
+
+    right: 0px;
+    bottom: 0px;
+}
+
+.logo
+{
+    position: relative;
+
+    font-family: monaco;
+    font-size: 11px !important;
+    letter-spacing: 1px;
+    padding-left: 10px !important;
+
+    color: #555 !important;
+}
+
+.icon 
+{
+    width: 50px;
+    height: 45px;
+    font-size: 20px;
+
+    background-color: transparent;
+    color: #aaa;
+    border: 0px;
+    border-left: 0px solid transparent;
+    outline: 0px;
+}
+
+.icon:hover
+{
+    color: #e5e5e5;
+    border-color: #e5e5e5;
+
+    transition: 1s all;
+}
+
+.active
+{
+    color: #fff !important;  
+}
+
+.size-17
+{
+    font-size: 17px !important;
+}

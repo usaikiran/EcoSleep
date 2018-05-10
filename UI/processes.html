@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <script type="text/javascript" src="js/dashboard.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+
+    <link rel="stylesheet" href="css/settings.css">
+    <link rel="stylesheet" href="css/processes.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/toggle.css">
+    <link rel="stylesheet" href="css/checkbox.css">
+    <link rel="stylesheet" href="css/input_slider.css">
+
+</head>
+
+<body>
+
+    <div class="process-settings-div left">
+
+        <label class="label header">SELECTED PROCESSES</label>
+
+        <table cellpadding="10" cellspacing="5">
+
+            <tr id="0">
+                <td><button class="material-icons delete">&#xe909;</button></td>
+                <td>TOTEM</td>
+            </tr>
+            <tr id="1">
+                <td><button class="material-icons delete">&#xe909;</button></td>
+                <td>VLC MEDIA PLAYER</td>
+            </tr>
+            <tr id="2">
+                <td><button class="material-icons delete">&#xe909;</button></td>
+                <td>GOOGLE CHROME</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+    <div class="process-settings-div right">
+
+        <label class="label header">CURRENTLY RUNNING PROCESSES</label>
+
+        <table>
+
+            <tr id="0">
+                <td>
+                    <label class="container"><span class="elipsis">TOTEM</span>
+                        <input type="checkbox" checked="checked">
+                        <span class="checkmark"></span>
+                    </label>
+                </td>
+            </tr>
+            <tr id="1">
+                <td>
+                    <label class="container"><span class="elipsis">VLC MEDIA PLAYER</span>
+                        <input type="checkbox" checked="checked">
+                        <span class="checkmark"></span>
+                    </label>
+                </td>
+            </tr>
+            <tr id="2">
+                <td>
+                    <label class="container"><span class="elipsis">NFS-MOST WANTED</span>
+                        <input type="checkbox" checked="checked">
+                        <span class="checkmark"></span>
+                    </label>
+                </td>
+            </tr>
+            <tr id="3">
+                <td>
+                    <label class="container"><span class="elipsis">GOOGLe CHROME</span>
+                        <input type="checkbox" checked="checked">
+                        <span class="checkmark"></span>
+                    </label>
+                </td>
+            </tr>
+
+        </table>
+
+    </div>
+
+
+    <!--div class="slider-settings-div">
+
+        <div class="slider-div">
+            <input type="range" min="1" max="100" value="50" class="input-slider" id="myRange">
+        </div>
+
+    </div-->
+
+</body>
+</html>

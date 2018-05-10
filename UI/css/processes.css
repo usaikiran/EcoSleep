@@ -1,0 +1,47 @@
+
+body
+{
+    overflow-x: hidden;
+}
+
+.selected
+{
+    color: darkseagreen;
+    background-color: transparent;
+    border: 0px;
+    outline: none;
+}
+
+.unselected
+{
+    color: darkseagreen;
+    background-color: transparent;
+    border: 0px;
+    outline: none;
+}
+
+.process-settings-div
+{
+    position: relative;
+
+    width: 40vw;
+    text-align: left;
+
+    margin: 20px 5vw 0px 5vw;
+}
+
+table
+{
+    position: relative;
+
+    display: inline-block;
+}
+
+.elipsis
+{
+    width: 25vw;
+
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

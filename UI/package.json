@@ -1,0 +1,16 @@
+{
+  "name": "project-es",
+  "version": "0.0.0",
+  "description": "GUI for Eco-Sleep",
+  "main": "server.js",
+  "author": "botsk",
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "webcamjs": "^1.0.25"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "electron ."
+  }
+}
