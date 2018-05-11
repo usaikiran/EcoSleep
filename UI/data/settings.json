@@ -1,0 +1,7 @@
+{
+    "wait_time" : 4,
+    "fps" : 10,
+    "scale" : 1.0,
+    "track_keyboard" : true,
+    "track_mouse" : false
+}

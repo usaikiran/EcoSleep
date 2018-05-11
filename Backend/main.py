@@ -137,10 +137,10 @@ if __name__ == "__main__":
     init()
 
     pc = process_control.ProcessControl()
-    mouse = mouse_listener.MouseListener()
+    #mouse = mouse_listener.MouseListener()
 
     keyboard.on_press( reset_monitor_state )
-    mouse.on_mouse_action( reset_monitor_state )
+    #mouse.on_mouse_action( reset_monitor_state )
     
     dlib_detector = Detector()
     dlib_detector.wait_time = 4

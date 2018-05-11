@@ -14,10 +14,10 @@ class ProcessControl:
         self.paused_pid_list = []
 
 
-    def get_process_list( self ):
+    def get_process_list( self, process_type="GET_PROCESS_LIST" ):
 
         self.commands = main.load_commands()
-        out = os.popen( self.commands[ "GET_PROCESS_LIST" ] ).read()
+        out = os.popen( self.commands[ process_type ] ).read()
         self.process_list = out.split( "\n" )
 
 
@@ -62,9 +62,7 @@ if __name__ == "__main__":
 
         if sys.argv[1] == "-l":
             
-            pc.get_process_list()
-
-            out = open( "../UI/process_list.dat", "w" )
-            out.write( "\n".join( pc.process_list ) )
+            pc.get_process_list( "GET_RUNNING_APPLICATIONS" )
+            print "\n".join( pc.process_list ),
 
 

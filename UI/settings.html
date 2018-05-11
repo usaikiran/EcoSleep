@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
     <script type="text/javascript" src="js/dashboard.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/settings.js"></script>
 
     <link rel="stylesheet" href="css/settings.css">
     <link rel="stylesheet" href="css/dashboard.css">
@@ -38,17 +38,17 @@
         <div class="numeric-settings-div">
 
             <div class="input-div">
-                <input type="text" class="input-cell" height="60px"><br/>
+                <input id="wait-time" type="text" class="input-cell" height="60px"><br/>
                 <label class="label cell-desc">WAIT TIME</label>
             </div>
             
             <div class="input-div">
-                <input type="text" class="input-cell" height="60px"><br/>
-                <label class="label cell-desc">FRAMES / MIN</label>
+                <input id="fps" type="text" class="input-cell" height="60px"><br/>
+                <label class="label cell-desc">FRAMES / SEC</label>
             </div>
             
             <div class="input-div">
-                <input type="text" class="input-cell" height="60px"><br/>
+                <input id="scale" type="text" class="input-cell" height="60px"><br/>
                 <label class="label cell-desc">IMAGE SCALE</label>
             </div>
 
@@ -66,7 +66,7 @@
                 <lable id="toggle-keyboard" class="label toggle-state">TRACK KEYBOARD EVENTS</lable>
 
                 <label class="switch">
-                    <input type="checkbox" onclick="toggle_settings(0)">
+                    <input id="keyboard" type="checkbox" onclick="toggle_settings(0)">
                     <span class="slider round"></span>
                 </label>
 
@@ -77,7 +77,7 @@
                 <lable id="toggle-mouse" class="label toggle-state">TRACK MOUSE EVENTS</lable>
 
                 <label class="switch">
-                    <input type="checkbox" onclick="toggle_settings(1)">
+                    <input id="mouse" type="checkbox" onclick="toggle_settings(1)">
                     <span class="slider round"></span>
                 </label>
 

@@ -7,5 +7,6 @@
     "GET_PROCESS_LIST" : "ps aux | awk '{ print $11 }'",
     "GET_PROCESS_ID" : "ps aux | grep #PROCESS_NAME | awk '{ print $2 }'",
     "PAUSE_PROCESS" : "sudo kill -STOP ",
-    "RESUME_PROCESS" : "sudo kill -CONT "
+    "RESUME_PROCESS" : "sudo kill -CONT ",
+    "GET_RUNNING_APPLICATIONS" : "qdbus org.ayatana.bamf /org/ayatana/bamf/matcher org.ayatana.bamf.matcher.RunningApplications | xargs -I {} qdbus org.ayatana.bamf {} org.ayatana.bamf.view.Name"
 }
