@@ -35,6 +35,24 @@ ipcMain.on('get-process-list', function(event, arg) {
 
 });
 
+ipcMain.on('set-process-list', function(event, arg) {
+    
+    console.log( "process : "+arg );
+    data = { "PAUSE_PROCESS_LIST" : arg }
+    data = JSON.stringify( data );
+
+    fs.writeFile("../Backend/config.json", data, function(err) {
+        if(err) {
+            event.returnValue = "error";
+        }
+        else{
+            console.log("data : "+data);
+            event.returnValue = "success";
+        }
+    });
+
+});
+
 ipcMain.on('brightness', function(event, arg) {
 
     if( arg=="get" )
