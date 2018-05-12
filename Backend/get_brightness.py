@@ -25,8 +25,10 @@ def get_brightness():
 
 if len( sys.argv ) > 1:
     if sys.argv[1] == "-s":
-        val = int( sys.argv[2] )
-        set_brightness( val )
+        val = float( sys.argv[2] )
+
+        if val <1.0 and val>0.0:
+            set_brightness( val )
     
 else:
     print get_brightness

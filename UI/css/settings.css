@@ -24,6 +24,8 @@ body
     float: left;
     margin: 10px;
 
+    padding-bottom: 3px;
+    border-radius: 4px 4px 3px 3px;
     background-color: #444;
 }
 
@@ -42,6 +44,8 @@ body
     color: #e0e0e0;
     background-color: #2A2A2A;
     border: 0px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
 }
 
 .cell-desc
@@ -211,6 +215,7 @@ td
 
     font-family: monaco;
     font-size: 12px;
+    font-weight: bold;
     letter-spacing: 1px;
 }
 

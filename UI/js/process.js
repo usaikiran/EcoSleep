@@ -24,20 +24,22 @@ htmlContent = ""
 
 for( var i=0; i<process_list.length-1; i++ )
 {
+    tag = "";
+    if( pause_list.indexOf( process_list[i].toLowerCase() ) != -1 )
+    {
+        tag = "checked"
+    }
+
     htmlContent += '<tr id='+i+'> \
         <td> \
             <label class="container"><span class="elipsis">'+process_list[i].toUpperCase()+'</span>\
-                <input id="checkbox-process-'+i+'" type="checkbox" checked="checked" > \
+                <input id="checkbox-process-'+i+'" type="checkbox" '+tag+'> \
                 <span class="checkmark" id="checkmark-"'+i+'"></span> \
             </label> \
         </td> \
     </tr>';
-
-    if( pause_list.indexOf( process_list[i].toLowerCase() ) == -1 )
-    {
-        console.log( "-> "+process_list[i] );
-        $("#checkbox-process-"+i ).removeAttr('checked'); ;
-    }
 }
 
 $( "#table-running-process" ).html( htmlContent );
+
+console.log( pause_list, pause_list.indexOf( "totem" ) );

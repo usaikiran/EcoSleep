@@ -27,7 +27,7 @@ ipcMain.on('get-process-list', function(event, arg) {
         exec( "cd ../Backend/ && python process_control.py -p", function(error, stdout, stderr){ 
             pause_list = stdout; 
 
-            res = process_list + " : " + pause_list;
+            res = process_list + " :" + pause_list;
             console.log( res );
             event.returnValue = res;
             });
@@ -39,22 +39,18 @@ ipcMain.on('brightness', function(event, arg) {
 
     if( arg=="get" )
     {
-
+        exec( "cd ../Backend/ && python brightness.py", function(error, stdout, stderr){     
+            
+            console.log( stdout+error );
+            event.returnValue = stdout;
+        });
     }
     else
     {
-        
-    }
-
-    fs.writeFile("data/settings.json", data, function(err) {
-        if(err) {
-            event.returnValue = "error";
-        }
-        else{
-            console.log("data : "+data);
-            event.returnValue = "success";
-        }
-    }); 
+        exec( "cd ../Backend/ && python brightness.py -s "+arg, function(error, stdout, stderr){ 
+            event.returnValue = "set";
+        });
+    } 
 
 });
 
