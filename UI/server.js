@@ -13,11 +13,22 @@ var mainWindow = null;
 const ipcMain = require('electron').ipcMain;
 
 ipcMain.on('get-process-list', function(event, arg) {
-  console.log( "process : "+arg );
+    console.log( "process : "+arg );
 
-  res = exec( "python ../Backend/process_control.py -l" ).toString();
-  console.log( res );
-  event.returnValue = res;
+    process_list = ""
+    pause_list = ""
+
+    exec( "cd ../Backend/ && python process_control.py -l", function(error, stdout, stderr){ 
+        process_list = stdout; 
+
+        exec( "cd ../Backend/ && python process_control.py -p", function(error, stdout, stderr){ 
+            pause_list = stdout; 
+
+            res = process_list + " : " + pause_list;
+            console.log( res );
+            event.returnValue = res;
+            });
+    });
 
 });
 

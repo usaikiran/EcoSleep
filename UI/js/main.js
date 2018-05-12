@@ -32,5 +32,5 @@ function onNavIconClick( id )
 
     prev_active_icon = id;
 
-    $( "#content-div" ).attr( "src", iframe_src[id] );
+    $( "#content-div" ).load( iframe_src[id] );
 }
