@@ -5,7 +5,7 @@ import os
 import signal
 
 
-def getWatt( dur = 1):
+def getWatt( dur = 1 ):
 	file = open("tmp" , "w")
 	process = Popen(["powerstat -d 0 " + str(int(dur))], shell = True , stdout= file , preexec_fn=os.setsid)
 	sleep(dur + 0.1)
