@@ -25,7 +25,6 @@ class ProcessControl:
         out = process_list.getList()
         self.process_list = out.split( "\n" )
 
-
     def pause_processes( self ):
 
         self.get_process_list()
@@ -37,9 +36,7 @@ class ProcessControl:
                 for pid in process_list.getPidList(process) :
                     print os.popen( self.commands[ "PAUSE_PROCESS" ] + pid ).read()
                     self.paused_pid_list.append( pid )                    
-
-
-
+                    
     def resume_processes( self ):
         
         for pid in self.paused_pid_list:
@@ -48,18 +45,14 @@ class ProcessControl:
         
         self.paused_pid_list = []
 
-
 if __name__ == "__main__":
 
-    
     pc = ProcessControl()
 
-    
     # pc.pause_processes()
     # import time
     # time.sleep( 5 )
     # pc.resume_processes()
-    
 
     if len( sys.argv ) > 1:
 
@@ -71,5 +64,3 @@ if __name__ == "__main__":
         else :
 
             print "\n".join( pc.getPauseList() )
-
-

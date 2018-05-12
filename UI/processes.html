@@ -17,8 +17,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
-    <script type="text/javascript" src="node_modules/electron/index.js"></script>
-    <script type="text/javascript" data-main="js/process.js" src="js/require.js"></script>
+    <script type="text/javascript" src="js/process.js"></script>
 
     <link rel="stylesheet" href="css/settings.css">
     <link rel="stylesheet" href="css/processes.css">
@@ -32,13 +31,13 @@
 
 <body>
 
-    <div class="process-settings-div left">
+    <div class="process-settings-div col-sm-6">
 
-        <label class="label header">SELECTED PROCESSES</label>
+        <label class="label header">SELECTED PROCESSES</label></br>
 
-        <table cellpadding="10" cellspacing="5">
+        <table id="table-paused-process">
 
-            <tr id="0">
+            <!--tr id="0">
                 <td><button class="material-icons delete">&#xe909;</button></td>
                 <td>TOTEM</td>
             </tr>
@@ -49,45 +48,21 @@
             <tr id="2">
                 <td><button class="material-icons delete">&#xe909;</button></td>
                 <td>GOOGLE CHROME</td>
-            </tr>
+            </tr-->
 
         </table>
 
     </div>
 
-    <div class="process-settings-div right">
+    <div class="process-settings-div col-sm-6">
 
         <label class="label header">CURRENTLY RUNNING PROCESSES</label>
 
-        <table>
+        <table id="table-running-process">
 
-            <tr id="0">
+            <!--tr id="0">
                 <td>
                     <label class="container"><span class="elipsis">TOTEM</span>
-                        <input type="checkbox" checked="checked">
-                        <span class="checkmark"></span>
-                    </label>
-                </td>
-            </tr>
-            <tr id="1">
-                <td>
-                    <label class="container"><span class="elipsis">VLC MEDIA PLAYER</span>
-                        <input type="checkbox" checked="checked">
-                        <span class="checkmark"></span>
-                    </label>
-                </td>
-            </tr>
-            <tr id="2">
-                <td>
-                    <label class="container"><span class="elipsis">NFS-MOST WANTED</span>
-                        <input type="checkbox" checked="checked">
-                        <span class="checkmark"></span>
-                    </label>
-                </td>
-            </tr>
-            <tr id="3">
-                <td>
-                    <label class="container"><span class="elipsis">GOOGLe CHROME</span>
                         <input type="checkbox" checked="checked">
                         <span class="checkmark"></span>
                     </label>

@@ -2,7 +2,7 @@
 import os
 
 def getNameFromPid( pid ):
-    return  str.capitalize(os.popen('cat /proc/' + str(pid) +'/status | head -n 1 | awk \'{ print $2 }\'').read())[:-1]
+    return  os.popen('cat /proc/' + str(pid) +'/status | head -n 1 | awk \'{ print $2 }\'').read()[:-1]
 
 def getRunningPid():
     cmd = "wmctrl -lp | awk '{print $3}'"

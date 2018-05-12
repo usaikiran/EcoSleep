@@ -53,8 +53,8 @@
             </div>
 
             <div class="input-div">
-                <input type="text" class="input-cell" height="60px"><br/>
-                <label class="label cell-desc">TOLERANCE</label>
+                <input id="brightness-interval" type="text" class="input-cell" height="60px"><br/>
+                <label class="label cell-desc">BRIGHTNESS PERIOD</label>
             </div>
     
         </div>
@@ -63,10 +63,10 @@
 
             <div class="toggle-div left ">
 
-                <lable id="toggle-keyboard" class="label toggle-state">TRACK KEYBOARD EVENTS</lable>
+                <lable id="toggle-keyboard" class="label toggle-state">TRACK KEYBOARD</lable>
 
                 <label class="switch">
-                    <input id="keyboard" type="checkbox" onclick="toggle_settings(0)">
+                    <input id="keyboard" type="checkbox">
                     <span class="slider round"></span>
                 </label>
 
@@ -74,10 +74,21 @@
 
             <div class="toggle-div left">
 
-                <lable id="toggle-mouse" class="label toggle-state">TRACK MOUSE EVENTS</lable>
+                <lable id="toggle-mouse" class="label toggle-state">TRACK MOUSE</lable>
 
                 <label class="switch">
-                    <input id="mouse" type="checkbox" onclick="toggle_settings(1)">
+                    <input id="mouse" type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+
+            </div>
+
+            <div class="toggle-div left">
+
+                <lable id="toggle-brightness" class="label toggle-state">AUTO BRIGHTNESS</lable>
+
+                <label class="switch">
+                    <input id="auto-brightness" type="checkbox">
                     <span class="slider round"></span>
                 </label>
 
@@ -86,36 +97,19 @@
 
         </div><br/><br/>
 
-        <div class="process-settings-div">
+        <div class="slider-settings-div">
 
-            <label class="label header">SELECTED PROCESSES LIST</label>
-            <button class="label header ext-btn" onclick="onNavIconClick(3)">MANAGE</button>
-
-            <table cellpadding="10" cellspacing="5">
-                <tr id="0">
-                    <td><button class="material-icons delete">&#xe909;</button></td>
-                    <td>TOTEM</td>
-                </tr>
-                <tr id="1">
-                    <td><button class="material-icons delete">&#xe909;</button></td>
-                    <td>VLC MEDIA PLAYER</td>
-                </tr>
-                <tr id="2">
-                    <td><button class="material-icons delete">&#xe909;</button></td>
-                    <td>GOOGLE CHROME</td>
-                </tr>
-
-            </table>
-
-        </div>
-
-        <!--div class="slider-settings-div">
-
-            <div class="slider-div">
-                <input type="range" min="1" max="100" value="50" class="input-slider" id="myRange">
+            <label class="header-style-2">BRIGHTNESS</label>
+            <div class="slider-div brightness-slider">
+                <input id="brightness" type="range" min="1" max="100" value="50" class="input-slider" id="myRange">
             </div>
 
-        </div-->
+        </div></br>
+
+        <div class="control-btn">
+            <button class="btn btn-save" onclick="save( false )">SAVE</button>
+            <button class="btn btn-save" onclick="save( true )">RESTART</button>
+        </div>
 
     </div>
 
