@@ -1,4 +1,9 @@
 
+body
+{
+    text-align: center;
+}
+
 .numeric-settings-div
 {
     position: relative;
@@ -6,6 +11,8 @@
     display: inline-block;
     text-align: center;
     margin-top: 10px;
+
+    left: -25px;
 }
 
 .input-div
@@ -62,6 +69,8 @@ input:focus
 
     margin-top: 30px;
     text-align: center;
+
+    left: -25px;
 }
 
 .toggle-div
@@ -69,7 +78,7 @@ input:focus
     position: relative;
 
     display: block;
-    width: 300px;
+    margin: 20px;
 }
 
 .right
@@ -150,4 +159,62 @@ td
     color: #ccc;
     border-bottom: 0px #555 solid;
     letter-spacing: 1px;
+}
+
+.brightness-slider
+{
+    width: 94%; 
+    margin-top: 30px;
+}
+
+.slider-settings-div
+{
+    position: relative;
+    display: inline-block;
+
+    width: 90%;
+    margin-top: 7px;
+}
+
+.header-style-2
+{
+    position: relative;
+
+    font-family: monaco;
+    font-weight: bold;
+    font-size: 13px;
+
+    float: left;
+    letter-spacing: 1px;
+    color: #e5e5e5;
+}
+
+.control-btn
+{
+    position: relative;
+
+    text-align: center;
+    margin-top: 25px;
+}
+
+.btn-save
+{
+    position: relative;
+    display: inline-block;
+
+    margin: 5px;
+    padding: 3px 15px !important;
+
+    border-radius: 3px;
+    background-color: #2196F3 !important;
+    color: #fff;
+
+    font-family: monaco;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.btn-save:hover
+{
+    color: #fff;
 }

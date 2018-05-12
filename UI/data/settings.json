@@ -1,7 +1,1 @@
-{
-    "wait_time" : 4,
-    "fps" : 10,
-    "scale" : 1.0,
-    "track_keyboard" : true,
-    "track_mouse" : false
-}
+{"auto_brightness":true,"brightness":"50","brightness_interval":"4","fps":"15","scale":"1","track_keyboard":true,"track_mouse":false,"wait_time":"3"}

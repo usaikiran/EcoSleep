@@ -16,25 +16,43 @@ function read(file)
                 $( "#wait-time" ).val( ""+data["wait_time"] );
                 $( "#fps" ).val( ""+data["fps"] );
                 $( "#scale" ).val( ""+data["scale"] );
+                $( "#brightness_interval" ).val( ""+data["auto-brightness"] );
 
                 if( data["track_keyboard"] == true )
                     $('#keyboard').trigger('click');
 
                 if( data["track_mouse"] == true )
                     $('#mouse').trigger('click');
+
+                if( data["auto_brightness"] == true )
+                    $('#auto-brightness').trigger('click');
             }
         }
     }
     rawFile.send(null);
 }
+``
+var settings_filename = "data/settings.json";
+read( settings_filename );
 
-window.onload = function()
+function save( restart )
 {
-    var settings_filename = "data/settings.json";
-    read( settings_filename );
+    var settings = {
+        "wait_time" : $( "#wait-time" ).val(),
+        "fps" : $( "#fps" ).val(),
+        "scale" : $( "#scale" ).val(),
+        "brightness_interval" : $( "#brightness-interval" ).val(),
+        "track_keyboard" : $( "#keyboard" ).is(":checked"),
+        "track_mouse" : $( "#mouse" ).is(":checked"),
+        "auto_brightness" : $( "#auto-brightness" ).is(":checked"),
+        "brightness" : $( "#brightness" ).val()
+    }
 
+    var out = ipcRenderer.sendSync('save-settings', settings )
+}
 
-    var file = new File( "tes.dat" );
-    file.write( "test" );
-    file.close();
+function brightness()
+{
+    var out = ipcRenderer.sendSync('brightness', 'get' )
+    
 }

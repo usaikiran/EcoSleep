@@ -36,7 +36,7 @@ class ProcessControl:
                 for pid in process_list.getPidList(process) :
                     print os.popen( self.commands[ "PAUSE_PROCESS" ] + pid ).read()
                     self.paused_pid_list.append( pid )                    
-
+                    
     def resume_processes( self ):
         
         for pid in self.paused_pid_list:
@@ -47,7 +47,6 @@ class ProcessControl:
 
 if __name__ == "__main__":
 
-    
     pc = ProcessControl()
 
     # pc.pause_processes()

@@ -23,7 +23,10 @@ body
     height: 89vh;
     float: right;
 
+    background: #222;
     border: 0px;
+
+    text-align: center;
 }
 
 .toggle-switch

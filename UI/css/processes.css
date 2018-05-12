@@ -45,3 +45,9 @@ table
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.caps-text
+{
+    font-family: monaco;
+    font-weight: bold;
+}
