@@ -29,7 +29,6 @@ except Exception as err:
 
     import install_dependencies
 
-
 try:
 
     from detector import *
