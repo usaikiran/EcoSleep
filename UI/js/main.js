@@ -19,7 +19,7 @@ function toggle()
 window.onload = function()
 {
     $('[data-toggle="tooltip"]').tooltip()
-    onNavIconClick( 4 );
+    onNavIconClick( 0 );
     
     
     //console.log( "test : " + ipcRenderer.sendSync('get-process-list', '') );
