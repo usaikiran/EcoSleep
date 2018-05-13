@@ -4,22 +4,10 @@ from time import sleep
 import os
 import signal
 
-<<<<<<< HEAD
-def getWatt( interval=1 ):
-
-	interval = min( interval, 1 )
-	sleep( max( 0, interval-1.1 ) )
-
+def getWatt():
 	file = open("tmp" , "w")
 	process = Popen(["powerstat -d 0 1"], shell = True , stdout= file , preexec_fn=os.setsid)
-	sleep( 1.1 )
-=======
-
-def getWatt( dur = 1 ):
-	file = open("tmp" , "w")
-	process = Popen(["powerstat -d 0 " + str(int(dur))], shell = True , stdout= file , preexec_fn=os.setsid)
-	sleep(dur + 0.1)
->>>>>>> bf8743ce1282d742d3a404cdf273c76e99c4c302
+	sleep(1.1)
 	os.killpg(os.getpgid(process.pid), signal.SIGTERM)
 	process.kill()
 	file.close()

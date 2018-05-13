@@ -3,6 +3,7 @@ var ctx = $("#chart");
 var presets = window.chartColors;
 
 var seconds = 0;
+var xAxisLen = 5;
 
 var chartLabels = [];
 var chartValues = [];
@@ -158,6 +159,22 @@ var chart = new Chart( ctx, {
     }
 });
 
+function genArray( start, len ){
+    var arr = [];
+    console.log( "start : "+start+" len : "+len );
+    for( var i=start; i<start+len; i++ )
+        arr.push( i );
+    return arr;
+}
+
+function fillArray(value, len) {
+    var arr = [];
+    for (var i = 0; i < len; i++) {
+      arr.push(value);
+    }
+    return arr;
+}
+
 function toggleChartState()
 {
     chartState = !chartState;
@@ -167,6 +184,7 @@ function updateChart()
 {
     
     var out = ipcRenderer.sendSync('get-stats', 1);
+    var tempLables=[], tempValues=[]
 
     console.log( out );
     if( true || out != null )
@@ -175,17 +193,28 @@ function updateChart()
         chartValues.push( out );
     }
     
-    if( chartValues.length > 20 )
+    if( chartValues.length >= xAxisLen )
     {
         chartLabels.shift();
         chartValues.shift();
+
+        tempValues = chartValues;
+        tempLables = chartLabels;
+    }
+    else
+    {
+        len = chartValues.length;
+        tempValues = chartValues.concat( fillArray( NaN, xAxisLen-len ) );
+        tempLables = chartLabels.concat( genArray( len, xAxisLen-len ) );
     }
 
     if( active_frame==4 && chartPaused==false )
         setTimeout( updateChart, 1000 )
     
-    chart.data.datasets[0].data = chartValues;
-    chart.data.labels = chartLabels;
+    console.log( tempValues, tempLables );
+
+    chart.data.datasets[0].data = tempValues;
+    chart.data.labels = tempLables;
 
     if( out != null )
         chart.update();
@@ -199,11 +228,15 @@ function resetChart()
     chartLabels = [];
     chartValues = [];
 
-    if( chartPaused == true )
+    chart.data.datasets[0].data = chartLabels;
+    chart.data.labels = chartLabels;
+    chart.update();
+
+    /*if( chartPaused == true )
     {
         chartPaused = false;
         setTimeout( updateChart, 1000);
-    }
+    }*/
 }
 
 function flow_control()
