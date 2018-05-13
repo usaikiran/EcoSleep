@@ -1,0 +1,44 @@
+body
+{
+    text-align: center;
+}
+
+.chart-container
+{
+    position: relative;
+    
+    height:40vh;
+    width:80vw;
+
+    margin: auto;
+}
+
+.control-btn-div
+{
+    position: relative;
+
+    margin-top: 17px;
+}
+
+.stat-btn
+{
+    position: relative;
+    display: inline-block;
+
+    background-color: #000;
+    color: #fff;
+    border: 0px;
+    border-radius: 5px;
+
+    font-family: monaco;
+    font-size: 17px;
+    font-weight: bold;
+    padding: 5px 9px 2px 9px;
+    letter-spacing: 1px;
+    margin: 5px;
+}
+
+.material-icons
+{
+    font-size: inherit !important;
+}

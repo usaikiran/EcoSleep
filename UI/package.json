@@ -6,6 +6,7 @@
   "author": "botsk",
   "license": "MIT",
   "dependencies": {
+    "chart.js": "^2.7.2",
     "jquery": "^3.3.1",
     "webcamjs": "^1.0.25"
   },

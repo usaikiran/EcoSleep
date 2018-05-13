@@ -1,7 +1,7 @@
 
 const ipcRenderer = require('electron').ipcRenderer;
 
-var prev_active_icon = 0;
+var prev_active_icon = 0, active_frame=0;
 var iframe_src = [ "dashboard.html", "webcam.html", "settings.html", "processes.html", "stats.html" ]
 
 var state = 0;
@@ -19,7 +19,7 @@ function toggle()
 window.onload = function()
 {
     $('[data-toggle="tooltip"]').tooltip()
-    onNavIconClick( 3 );
+    onNavIconClick( 4 );
     
     
     //console.log( "test : " + ipcRenderer.sendSync('get-process-list', '') );
@@ -31,6 +31,8 @@ function onNavIconClick( id )
     $( "#"+id ).addClass( "active" );
 
     prev_active_icon = id;
+    active_frame = id;
 
+    $( "#content-div" ).empty();
     $( "#content-div" ).load( iframe_src[id] );
 }

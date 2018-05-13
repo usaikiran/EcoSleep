@@ -14,6 +14,17 @@ var mainWindow = null;
 
 const ipcMain = require('electron').ipcMain;
 
+ipcMain.on('get-stats', function(event, arg) {
+    console.log( "stats interval : "+arg );
+
+    exec( "cd ../Backend/ && python power_stat.py", function(error, stdout, stderr){ 
+        val = parseFloat( stdout ); 
+        console.log( val );
+        event.returnValue = val;
+    });
+
+});
+
 ipcMain.on('get-process-list', function(event, arg) {
     console.log( "process : "+arg );
 

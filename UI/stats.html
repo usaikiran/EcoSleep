@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>  
+    <script src="js/stats.js"></script>
+    <link rel="stylesheet" href="css/stats.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div id="stat-chart" class="chart-container">
+        <canvas id="chart"></canvas>
+    </div>
+
+    <div class="control-btn-div">
+        <button class="stat-btn" onclick="flow_control()"><i id="control-icon" class="material-icons">
+                play_arrow
+                </i></button>
+        <button class="stat-btn" onclick="resetChart()"><i class="material-icons">
+                replay
+                </i></button>
+    </div>
+</body>
+
+</html>

@@ -24,13 +24,13 @@
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background: dodgerblue;
+    background: #2196F3;
     cursor: pointer;
 }
 
 .input-slider::-moz-range-thumb {
     width: 25px;
     height: 25px;
-    background: #4CAF50;
+    background: #2196F3;
     cursor: pointer;
 }
