@@ -97,7 +97,8 @@ body
 .active
 {
     color: #fff !important;  
-    background-color: #000;
+    background-color: #000 !important;
+    color: #fff !important;
 }
 
 .size-17

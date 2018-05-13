@@ -3,7 +3,7 @@ var ctx = $("#chart");
 var presets = window.chartColors;
 
 var seconds = 0;
-var xAxisLen = 5;
+var xAxisLen = 20;
 
 var chartLabels = [];
 var chartValues = [];
@@ -13,6 +13,12 @@ var esChartValues = [10, 20, 10];
 
 var chartState = true;
 var chartPaused = true;
+
+var avg_power_consumed = 0;
+var total_readings = 0;
+
+var avg_power_conserved = 0;
+var total_es_readings = 0;
 
 Chart.plugins.register({
     beforeDraw: function(chart) {
@@ -109,7 +115,7 @@ var chart = new Chart( ctx, {
                 },
                 scaleLabel: {
                     display: true,
-                    labelString: 'Time ( seconds )',
+                    labelString: 'Time (seconds)',
                     fontColor: "#fff",
                     fontFamily: "monaco"
                 }
@@ -130,7 +136,7 @@ var chart = new Chart( ctx, {
                 },
                 scaleLabel: {
                     display: true,
-                    labelString: 'Joules',
+                    labelString: 'Energy (Joules)',
                     fontColor: "#fff",
                     fontFamily: "monaco"
                 },
@@ -139,23 +145,7 @@ var chart = new Chart( ctx, {
                 }
             }]
 
-        },
-        annotation: {
-            annotations: [
-              {
-                type: "line",
-                mode: "vertical",
-                scaleID: "x-axis-0",
-                value: 2,
-                borderColor: "red",
-                label: {
-                  content: "TODAY",
-                  enabled: true,
-                  position: "top"
-                }
-              }
-            ]
-          }
+        }
     }
 });
 
@@ -183,17 +173,19 @@ function toggleChartState()
 function updateChart()
 {
     
-    var out = ipcRenderer.sendSync('get-stats', 1);
+    var val = ipcRenderer.sendSync('get-stats', 1).split(":");
+    var out = parseFloat( val[0] );
+    var state = parseInt( val[1] );
     var tempLables=[], tempValues=[]
 
-    console.log( out );
+    //console.log( out+" : "+state );
     if( true || out != null )
     {
         chartLabels.push( ++seconds );
         chartValues.push( out );
     }
     
-    if( chartValues.length >= xAxisLen )
+    if( chartValues.length > xAxisLen )
     {
         chartLabels.shift();
         chartValues.shift();
@@ -211,15 +203,31 @@ function updateChart()
     if( active_frame==4 && chartPaused==false )
         setTimeout( updateChart, 1000 )
     
-    console.log( tempValues, tempLables );
+    //console.log( tempValues, tempLables );
 
     chart.data.datasets[0].data = tempValues;
     chart.data.labels = tempLables;
 
-    if( out != null )
+    if( out != NaN )
+    {
         chart.update();
 
-    console.log( chartLabels );
+        avg_power_consumed = ( avg_power_consumed*total_readings + out )/( total_readings+1 )
+
+        if( state==0 )
+        {
+            avg_power_conserved = ( avg_power_conserved*total_es_readings + (avg_power_consumed-out) )/( total_es_readings+1 )
+            total_es_readings +=1;
+        }
+        
+        $( "#power-consumed" ).html( avg_power_consumed.toFixed(2) );
+        $( "#power-conserved" ).html( avg_power_conserved.toFixed(2) );
+
+        console.log( "parameters : "+avg_power_consumed+" "+avg_power_conserved +" out : "+out+" diff"+avg_power_consumed-out);
+        total_readings += 1;
+    }
+
+    //console.log( chartLabels );
 }
 
 function resetChart()

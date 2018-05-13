@@ -18,9 +18,14 @@ ipcMain.on('get-stats', function(event, arg) {
     console.log( "stats interval : "+arg );
 
     exec( "cd ../Backend/ && python power_stat.py", function(error, stdout, stderr){ 
-        val = parseFloat( stdout ); 
-        console.log( val );
-        event.returnValue = val;
+        
+        watts = parseFloat( stdout ); 
+        exec( "cd ../Backend/ && python brightness.py", function(error, stdout, stderr){ 
+            
+            state = parseFloat( stdout ); 
+            console.log( stdout );
+            event.returnValue = watts+":"+state;
+        });
     });
 
 });

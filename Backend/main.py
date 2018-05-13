@@ -101,8 +101,10 @@ def brightness_transition(  action="OFF", time_period=3, target_brightness=0, cu
             #brightness_transition( "ON", 1, 1, current_brightness )
             return
 
-        #print current_brightness
         set_brightness( current_brightness )
+
+    if current_brightness<0 and action=="OFF":
+        set_brightness( 0 )
 
     os.system( commands[ "MONITOR_"+action ] )
     pc.pause_processes()
