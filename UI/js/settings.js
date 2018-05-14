@@ -1,4 +1,6 @@
 
+var ipcRenderer = require('electron').ipcRenderer;
+
 function read(file)
 {
     var rawFile = new XMLHttpRequest();
@@ -58,6 +60,10 @@ function brightness( val )
     else
         var out = ipcRenderer.sendSync('brightness', val )
 }
+
+$('#brightness').on('input', function () {
+    brightness( $('#brightness').val()/100 );
+});
 
 var settings_filename = "data/settings.json";
 read( settings_filename );

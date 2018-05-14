@@ -1,4 +1,6 @@
 
+var ipcRenderer = require('electron').ipcRenderer;
+
 function get_pause_html( title )
 {
     return "<tr id='pause-"+title+"'>\

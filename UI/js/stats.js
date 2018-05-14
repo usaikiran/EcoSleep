@@ -1,8 +1,11 @@
 
+var ipcRenderer = require('electron').ipcRenderer;
+
 var ctx = $("#chart");
 var presets = window.chartColors;
 
 var seconds = 0;
+var updateInterval = 5;
 var xAxisLen = 20;
 
 var chartLabels = [];
@@ -19,6 +22,10 @@ var total_readings = 0;
 
 var avg_power_conserved = 0;
 var total_es_readings = 0;
+var total_energy_saved = 0;
+
+var before = 0;
+var after = 0;
 
 Chart.plugins.register({
     beforeDraw: function(chart) {
@@ -149,6 +156,11 @@ var chart = new Chart( ctx, {
     }
 });
 
+function displayPopUp()
+{
+    $("#pop-up").attr( "display", "block" );
+}
+
 function genArray( start, len ){
     var arr = [];
     console.log( "start : "+start+" len : "+len );
@@ -172,8 +184,9 @@ function toggleChartState()
 
 function updateChart()
 {
-    
-    var val = ipcRenderer.sendSync('get-stats', 1).split(":");
+    after = new Date().getTime();
+
+    var val = ipcRenderer.sendSync('get-stats', updateInterval).split(":");
     var out = parseFloat( val[0] );
     var state = parseInt( val[1] );
     var tempLables=[], tempValues=[]
@@ -200,33 +213,44 @@ function updateChart()
         tempLables = chartLabels.concat( genArray( len, xAxisLen-len ) );
     }
 
-    if( active_frame==4 && chartPaused==false )
-        setTimeout( updateChart, 1000 )
+    if( active_frame==3 && chartPaused==false )
+        setTimeout( updateChart, updateInterval*1000 )
+    
     
     //console.log( tempValues, tempLables );
 
     chart.data.datasets[0].data = tempValues;
     chart.data.labels = tempLables;
 
-    if( out != NaN )
+    if( !isNaN( out ) )
     {
         chart.update();
 
         avg_power_consumed = ( avg_power_consumed*total_readings + out )/( total_readings+1 )
+        consumed = ( after-before )*avg_power_consumed;
 
         if( state==0 )
         {
             avg_power_conserved = ( avg_power_conserved*total_es_readings + (avg_power_consumed-out) )/( total_es_readings+1 )
+            var saved = ( ( after-before )/1000 )*avg_power_conserved;
+            
+            saved = Math.max( saved, 0 );
             total_es_readings +=1;
+            total_energy_saved += saved;
+            
+            $( "#power-conserved" ).html( total_energy_saved.toFixed(2) );
         }
         
         $( "#power-consumed" ).html( avg_power_consumed.toFixed(2) );
-        $( "#power-conserved" ).html( avg_power_conserved.toFixed(2) );
-
-        console.log( "parameters : "+avg_power_consumed+" "+avg_power_conserved +" out : "+out+" diff"+avg_power_consumed-out);
         total_readings += 1;
     }
+    else
+    {
+        console.log( "test" );
+        displayPopUp();
+    }
 
+    //before = after;
     //console.log( chartLabels );
 }
 
@@ -253,9 +277,13 @@ function flow_control()
 
     if( chartPaused == false )
     {
+        before = new Date().getTime();
         $( "#control-icon" ).html( "stop" );
-        setTimeout( updateChart, 1000);
+        setTimeout( updateChart, updateInterval*1000);
     }
     else
+    {
         $( "#control-icon" ).html( "play_arrow" );
+        resetChart();
+    }
 }

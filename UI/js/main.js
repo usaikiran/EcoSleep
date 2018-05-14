@@ -1,11 +1,11 @@
 
-const ipcRenderer = require('electron').ipcRenderer;
+var ipcRenderer = require('electron').ipcRenderer;
 
 var prev_active_icon = 0, active_frame=0;
-var iframe_src = [ "dashboard.html", "webcam.html", "settings.html", "processes.html", "stats.html" ]
+var iframe_src = [ "dashboard.html", "settings.html", "processes.html", "stats.html" ]
 
 var state = 0;
-var msg = [ "ON", "OFF" ];
+var msg = [ "ACTIVATE", "DISABLE" ];
 
 function toggle()
 {
@@ -13,16 +13,6 @@ function toggle()
     $( "#toggle-state" ).text( msg[state] )
 
     console.log( ipcRenderer.sendSync('toggle-action', ''+state) );
-
-}
-
-window.onload = function()
-{
-    $('[data-toggle="tooltip"]').tooltip()
-    onNavIconClick( 0 );
-    
-    
-    //console.log( "test : " + ipcRenderer.sendSync('get-process-list', '') );
 }
 
 function onNavIconClick( id )
@@ -35,4 +25,18 @@ function onNavIconClick( id )
 
     $( "#content-div" ).empty();
     $( "#content-div" ).load( iframe_src[id] );
+}
+
+window.onload = function()
+{
+    onNavIconClick( 2 );
+    $('[data-toggle="tooltip"]').tooltip();
+    
+    /*out = ipcRenderer.sendSync('brightness', 'get');
+    if( out > 0 )
+        state = 0;
+    else
+        state = 1;
+
+    toogle();*/
 }

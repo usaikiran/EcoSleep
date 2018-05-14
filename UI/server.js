@@ -108,7 +108,7 @@ ipcMain.on('toggle-action', function(event, arg) {
     console.log( arg );
 
     if( arg=="1" )
-        cmd = "./start"
+        cmd = "./start &"
     else
         cmd = "./kill"
 
