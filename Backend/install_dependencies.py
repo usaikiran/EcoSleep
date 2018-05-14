@@ -2,6 +2,10 @@
 import os
 
 cmds = [
+	"pip install dlib" ,
+	"pip install keyboard" ,
+	"pip install pynput" ,
+	"pip install python-opencv" , 
 	"npm list electron || npm i -g electron --unsafe-perm=true --allow-root" ,
 	"npm list http || npm i -g http" ,
 	"npm list net || npm i -g net" ,
