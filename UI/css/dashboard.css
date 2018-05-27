@@ -1,7 +1,7 @@
 
 body
 {
-    background-color: #222;
+    background-color: #151515;
     text-align: center;
 }
 
@@ -36,7 +36,7 @@ body
     width: calc(100% - 50px);
     float: right;
 
-    background: #222;
+    background: transparent;
     border: 0px;
 
     text-align: center;

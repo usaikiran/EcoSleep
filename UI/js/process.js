@@ -4,7 +4,7 @@ var ipcRenderer = require('electron').ipcRenderer;
 function get_pause_html( title )
 {
     return "<tr id='pause-"+title+"'>\
-    <td><i name='pause-checkbox' id="+title+" class='material-icons delete'>&#xe866;</i></td>\
+    <td><i name='pause-checkbox' id="+title+" class='material-icons delete'>&#xe892;</i></td>\
     <td class='caps-text'>"+ title +"</td>\
     </tr>";
 }

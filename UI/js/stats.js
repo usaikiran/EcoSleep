@@ -194,7 +194,7 @@ function updateChart()
     //console.log( out+" : "+state );
     if( true || out != null )
     {
-        chartLabels.push( ++seconds );
+        chartLabels.push( ( seconds++ )*updateInterval );
         chartValues.push( out );
     }
     
@@ -238,7 +238,15 @@ function updateChart()
             total_es_readings +=1;
             total_energy_saved += saved;
             
+            var unit = "JOULLES";
+            if( total_energy_saved > 1000 )
+            {
+                total_energy_saved /= 1000;
+                unit = "KILO JOULES";
+            }
+
             $( "#power-conserved" ).html( total_energy_saved.toFixed(2) );
+            $( "#conserved-unit" ).html( unit );
         }
         
         $( "#power-consumed" ).html( avg_power_consumed.toFixed(2) );

@@ -34,6 +34,7 @@ try:
     from detector import *
     import mouse_listener
     import process_control
+    from display_control
 
 except Exception as err:
 
@@ -63,8 +64,14 @@ def load_commands( path="commands.json" ):
     brightness = brightness.replace( "#DISPLAY_PORT", display_port )
     commands[ "SET_BRIGHTNESS" ] = brightness
 
-    return commands
+    return 
+    
+def getImgBrightness( img ):
 
+	cvt = cv2.cvtColor(img, cv2.COLOR_BGR2YUV)
+	y, u, v = cv2.split(cvt)
+
+	return np.average(y)
 
 def init():
 
@@ -117,10 +124,10 @@ def init_brightness_transition():
 
 def reset_monitor_state( *args ):    
 
-    global monitor_state, pc, dlib_detector
+    global monitor_state, pc, detector
 
     monitor_state = 1
-    dlib_detector.non_face_count = 0
+    detector.non_face_count = 0
 
     set_brightness( 1.0 )
     os.system( commands[ "MONITOR_ON" ] )
@@ -132,7 +139,7 @@ def reset_monitor_state( *args ):
 
 if __name__ == "__main__":
 
-    global monitor_state, dlib_detector, pc
+    global monitor_state, detector, pc
     
     monitor_state = 1
     init()
@@ -143,9 +150,9 @@ if __name__ == "__main__":
     keyboard.on_press( reset_monitor_state )
     #mouse.on_mouse_action( reset_monitor_state )
     
-    dlib_detector = Detector()
-    dlib_detector.wait_time = 4
-    dlib_detector.run_detector( on = reset_monitor_state, off = init_brightness_transition, state = state_handler )
+    detector = Detector()
+    detector.wait_time = 4
+    detector.run_detector( on = reset_monitor_state, off = init_brightness_transition, state = state_handler )
 
     reset_monitor_state()
     

@@ -11,6 +11,8 @@ import os
 import cv2
 import time
 import sys
+import json
+import predict
 from datetime import datetime
 
 #from pynput import mouse , keyboard
@@ -29,6 +31,20 @@ class Detector:
 		self.non_face_count = 0
 		self.wait_time = 3
 		self.detector = dlib.get_frontal_face_detector()	
+		self.fps = 15
+		self.scale = 1
+		self.wait_time = 3
+
+		self.brightness_interval = 10
+
+		with open( "../UI/data/settings.json" ) as fh:
+			data = json.loads( fh.read() )
+		
+		self.brightness_interval = int( data["brightness_interval"] )
+		self.fps = int( data["fps"] )
+		self.scale = float( data["scale"] )
+		self.wait_time = int( data["wait_time"] )
+
 
 	def changeFlag( self ):
 
@@ -36,38 +52,6 @@ class Detector:
 		
 		setFlag = 0
 		input_ev = False
-
-
-	def haarcascade_detector():
-
-		faceCascade = cv2.CascadeClassifier( "haarcascade_frontalface.xml" )
-
-		video_capture = cv2.VideoCapture(0)
-
-		while True:
-			# Capture frame-by-frame
-			ret, frame = video_capture.read()
-
-			gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
-			faces = faceCascade.detectMultiScale(
-				gray,
-				scaleFactor=1.1,
-				minNeighbors=5,
-				minSize=(30, 30),
-				flags=cv2.cv.CV_HAAR_SCALE_IMAGE
-			)
-
-			for (x, y, w, h) in faces:
-				cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
-
-			cv2.imshow('Video', frame)
-
-			if cv2.waitKey(1) & 0xFF == ord('q'):
-				break
-
-		video_capture.release()
-		cv2.destroyAllWindows()
 
 	def rect_to_bb(rect):
 		
@@ -85,20 +69,22 @@ class Detector:
 		try:
 
 			skip_frame = 3
-			downsample_ratio = 1
-			delay = 0.2
-			max_non_face_count = self.wait_time/delay
+			downsample_ratio = self.scale
+			delay = ( 1/self.fps )
+			max_non_face_count = int( ( self.wait_time )/delay )
 			self.non_face_count = 0
 			count = 0
 			#monitor_state = 1
 
-			print max_non_face_count
+			print delay, max_non_face_count, downsample_ratio
 
 			cam = cv2.VideoCapture( 0 )
 			start = time.time()
 			
 			prev_state = state()
 			while True:
+
+				before = datetime.now()
 
 				retval, frame = cam.read( )
 				small = cv2.resize( frame, ( 0,0 ), fx=1/downsample_ratio, fy=1/downsample_ratio )
@@ -133,22 +119,10 @@ class Detector:
 				else:
 					break
 
-				#print dets
-				'''for i, obj in enumerate( dets ):
-					
-					#print dir( obj ), obj.left(), obj.right(), obj.top(), obj.bottom(), obj.top
-					x = obj.left()
-					w = obj.right()-x
-					y = obj.top()
-					h = obj.bottom()-y
-					#x, y, w, h = rect_to_bb( obj[0] )
-					cv2.rectangle( frame, ( x, y ), ( x+w, y+h ), ( 0, 255, 0 ), 2 )
+				after = datetime.now()
 
-				cv2.imshow('Video', frame)
-
-				if cv2.waitKey(1) & 0xFF == ord('q'):
-					break'''
-				time.sleep( delay )
+				print ( after-before ).total_seconds()
+				time.sleep( max( 0, delay-( after-before ).total_seconds() ) )
 
 		except KeyboardInterrupt:
 
@@ -177,8 +151,7 @@ def state_handler( state=None ):
 if __name__ == "__main__":
 
 	global monitor_state
-	monitor_state = 0
+	monitor_state = 1
 
 	dlib_detector = Detector()
-	dlib_detector.wait_time = 4
 	dlib_detector.run_detector( on = on, off = off, state = state_handler )

@@ -15,7 +15,6 @@ var mainWindow = null;
 const ipcMain = require('electron').ipcMain;
 
 ipcMain.on('get-stats', function(event, arg) {
-    console.log( "stats interval : "+arg );
 
     exec( "cd ../Backend/ && python power_stat.py", function(error, stdout, stderr){ 
         
@@ -23,7 +22,7 @@ ipcMain.on('get-stats', function(event, arg) {
         exec( "cd ../Backend/ && python brightness.py", function(error, stdout, stderr){ 
             
             state = parseFloat( stdout ); 
-            console.log( stdout );
+            console.log( "interval : "+arg+" energy consumed : "+watts+" brightness : "+stdout );
             event.returnValue = watts+":"+state;
         });
     });
