@@ -23,8 +23,10 @@ ipcMain.on('get-stats', function(event, arg) {
         watts = parseFloat( stdout ); 
         exec( "cd ../Backend/ && python brightness.py", function(error, stdout, stderr){ 
             
-            state = parseFloat( stdout ); 
-            console.log( "interval : "+arg+" energy consumed : "+watts+" brightness : "+stdout );
+            state = parseFloat( ( stdout ) );
+            if( state != 0.0 ) 
+                state = 1.0;
+            console.log( "interval : "+arg+" energy consumed : "+watts+" state : "+state );
             event.returnValue = watts+":"+state;
         });
     });
