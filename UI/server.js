@@ -16,6 +16,8 @@ const ipcMain = require('electron').ipcMain;
 
 ipcMain.on('get-stats', function(event, arg) {
 
+    console.log( "\n@ipc-get-stats  args=[ "+arg+" ]" );
+
     exec( "cd ../Backend/ && python power_stat.py", function(error, stdout, stderr){ 
         
         watts = parseFloat( stdout ); 
@@ -30,7 +32,8 @@ ipcMain.on('get-stats', function(event, arg) {
 });
 
 ipcMain.on('get-process-list', function(event, arg) {
-    console.log( "process : "+arg );
+    
+    console.log( "\n@ipc-get-process-list args=[ "+arg+" ]" );
 
     process_list = ""
     pause_list = ""
@@ -52,7 +55,8 @@ ipcMain.on('get-process-list', function(event, arg) {
 
 ipcMain.on('set-process-list', function(event, arg) {
     
-    console.log( "process : "+arg );
+    console.log( "\n@ipc-set-process-list args=[ "+arg+" ]" );
+
     data = { "PAUSE_PROCESS_LIST" : arg }
     data = JSON.stringify( data );
 
@@ -70,11 +74,11 @@ ipcMain.on('set-process-list', function(event, arg) {
 
 ipcMain.on('brightness', function(event, arg) {
 
+    console.log( "\n@ipc-brightness args=[ "+arg+" ]" );
+
     if( arg=="get" )
     {
         exec( "cd ../Backend/ && python brightness.py", function(error, stdout, stderr){     
-            
-            console.log( stdout+error );
             event.returnValue = stdout;
         });
     }
@@ -88,6 +92,8 @@ ipcMain.on('brightness', function(event, arg) {
 });
 
 ipcMain.on('save-settings', function(event, arg) {
+
+    console.log( "\n@ipc-save-settings args=[ "+arg+" ]" );
 
     data = JSON.stringify( arg );
 
@@ -104,17 +110,21 @@ ipcMain.on('save-settings', function(event, arg) {
 });
 
 ipcMain.on('toggle-action', function(event, arg) {
-    console.log( arg );
+    console.log( "\n@ipc-toggle-action args=[ "+arg+" ]" );
 
     if( arg=="1" )
         cmd = "./start &"
     else
         cmd = "./kill"
 
-  res = exec( cmd ).toString();
-  event.returnValue = res;
+    exec( cmd, function(error, stdout, stderr){ 
 
-  console.log( "finished" );
+        console.log( "stdout : "+stdout+" \nstderr : "+stderr );
+        event.returnValue = stdout;
+    });
+  
+    event.returnValue = "NA";
+
 });
 
 app.on('ready', function() {

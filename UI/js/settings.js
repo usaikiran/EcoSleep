@@ -48,6 +48,17 @@ function save( restart )
     }
 
     var out = ipcRenderer.sendSync('save-settings', settings )
+
+    if( restart == true )
+    {
+        if( state ==1 )
+        {
+            ipcRenderer.sendSync('toggle-action', '0');
+            setTimeout(function(){ 
+                ipcRenderer.sendSync('toggle-action', '1');
+            }, 3000); 
+        }
+    }
 }
 
 function brightness( val )

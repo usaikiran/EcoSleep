@@ -15,6 +15,8 @@ class ProcessControl:
         self.pause_list = self.config[ "PAUSE_PROCESS_LIST" ]
         self.paused_pid_list = []
 
+        self.commands = main.load_commands()
+
     def getPauseList( self ):
 
         return self.pause_list
@@ -29,6 +31,8 @@ class ProcessControl:
 
         self.get_process_list()
 
+        self.commands = main.load_commands()
+        
         for process in self.process_list:
 
             if process in self.pause_list:

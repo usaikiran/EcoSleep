@@ -34,12 +34,10 @@ try:
     from detector import *
     import mouse_listener
     import process_control
-    from display_control
 
 except Exception as err:
 
     print err
-
 
 def state_handler( state=None ):
 
@@ -50,19 +48,25 @@ def state_handler( state=None ):
     else:
         monitor_state = state
 
-
 def load_commands( path="commands.json" ):
 
     global commands
     
-    with open( path ) as fh:
-        commands = json.loads( fh.read() )
+    try:
 
-    display_port = os.popen( commands[ "GET_DISPLAY_PORT" ] ).read().strip("\n")
-    
-    brightness = commands[ "SET_BRIGHTNESS" ].encode('ascii','ignore')
-    brightness = brightness.replace( "#DISPLAY_PORT", display_port )
-    commands[ "SET_BRIGHTNESS" ] = brightness
+        with open( path ) as fh:
+            commands = json.loads( fh.read() )
+
+        display_port = os.popen( commands[ "GET_DISPLAY_PORT" ] ).read().strip("\n")
+        
+        brightness = commands[ "SET_BRIGHTNESS" ].encode('ascii','ignore')
+        brightness = brightness.replace( "#DISPLAY_PORT", display_port )
+        commands[ "SET_BRIGHTNESS" ] = brightness
+
+        return commands
+    except err as Exception:
+
+        print "Exception @loadCommands : ", err
 
     return 
     
@@ -70,13 +74,33 @@ def getImgBrightness( img ):
 
 	cvt = cv2.cvtColor(img, cv2.COLOR_BGR2YUV)
 	y, u, v = cv2.split(cvt)
-
 	return np.average(y)
+
+
+def auto_brightness( img ):
+
+    prediction = getImgBrightness( img )
+    prediction = max( 0.2, min( 1, prediction/180 ) )
+    set_brightness( prediction )
 
 def init():
 
+    global auto_brightness, track_keyboard, track_mouse, brightness_interval
+
     load_commands()
 
+    auto_brightness = 10
+    track_keyboard = True
+    track_mouse = False
+    brightness_interval = 10
+
+    with open( "../UI/data/settings.json" ) as fh:
+        data = json.loads( fh.read() )
+    
+    brightness_interval = int( data["brightness_interval"] )
+    auto_brightness = data["auto_brightness"]
+    track_keyboard = data["track_keyboard"]
+    track_mouse = data["track_mouse"]
 
 def set_brightness( value=1.0 ):
 
@@ -136,23 +160,31 @@ def reset_monitor_state( *args ):
 
     print "on", datetime.now()
 
+def auto_brightness( img ):
+
+    prediction = getImgBrightness( img )
+    prediction = max( 0.2, min( 1, prediction/180 ) )
+    screen_brightness( prediction )
 
 if __name__ == "__main__":
 
-    global monitor_state, detector, pc
-    
+    global monitor_state, detector, pc, track_keyboard, track_mouse, brightness_interval
+
     monitor_state = 1
     init()
 
     pc = process_control.ProcessControl()
     #mouse = mouse_listener.MouseListener()
 
-    keyboard.on_press( reset_monitor_state )
-    #mouse.on_mouse_action( reset_monitor_state )
+    if track_keyboard == True:
+        keyboard.on_press( reset_monitor_state )
+
+    if track_mouse == True:
+        mouse.on_mouse_action( reset_monitor_state )
     
     detector = Detector()
     detector.wait_time = 4
-    detector.run_detector( on = reset_monitor_state, off = init_brightness_transition, state = state_handler )
+    detector.run_detector( reset_monitor_state, init_brightness_transition, state_handler )
 
     reset_monitor_state()
     

@@ -13,10 +13,24 @@ import time
 import sys
 import json
 import predict
+import numpy as np
 from datetime import datetime
 
 #from pynput import mouse , keyboard
 #from threading import Timer
+ 
+def getImgBrightness( img ):
+
+	cvt = cv2.cvtColor(img, cv2.COLOR_BGR2YUV)
+	y, u, v = cv2.split(cvt)
+	return np.average(y)
+
+
+def auto_brightness( img ):
+
+    prediction = getImgBrightness( img )
+    prediction = max( 0.2, min( 1, prediction/180 ) )
+    print prediction
 
 class Detector:
 
@@ -74,6 +88,9 @@ class Detector:
 			max_non_face_count = int( ( self.wait_time )/delay )
 			self.non_face_count = 0
 			count = 0
+
+			brightness_count = 0
+			auto_brightness_interval = int( self.brightness_interval/delay )
 			#monitor_state = 1
 
 			print delay, max_non_face_count, downsample_ratio
@@ -118,10 +135,15 @@ class Detector:
 
 				else:
 					break
-
+				'''
+				brightness_count += 1
+				if brightness_count == auto_brightness_interval:
+					brightness_count = 0
+					auto_brightness_callback( frame )
+				'''
 				after = datetime.now()
 
-				print ( after-before ).total_seconds()
+				#print ( after-before ).total_seconds()
 				time.sleep( max( 0, delay-( after-before ).total_seconds() ) )
 
 		except KeyboardInterrupt:
@@ -132,11 +154,12 @@ class Detector:
 def on():
 
     print "on", datetime.now()
-  
+
 
 def off( *args ):
 
     print "off", datetime.now()
+
 
 def state_handler( state=None ):
 
