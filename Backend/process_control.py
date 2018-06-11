@@ -1,7 +1,7 @@
 import os
 import json
-import main
 import sys
+import time
 import process_list
 
 class ProcessControl:
@@ -15,23 +15,42 @@ class ProcessControl:
         self.pause_list = self.config[ "PAUSE_PROCESS_LIST" ]
         self.paused_pid_list = []
 
-        self.commands = main.load_commands()
+        self.commands = self.load_commands()
 
+    def load_commands( self, path="commands.json" ):
+        
+        try:
+            self.commands = {}
+            
+            with open( path ) as fh:
+                self.commands = json.loads( fh.read() )
+
+            display_port = os.popen( self.commands[ "GET_DISPLAY_PORT" ] ).read().strip("\n")
+            
+            brightness = self.commands[ "SET_BRIGHTNESS" ].encode('ascii','ignore')
+            brightness = brightness.replace( "#DISPLAY_PORT", display_port )
+            self.commands[ "SET_BRIGHTNESS" ] = brightness
+
+            return self.commands
+
+        except Exception as err:
+
+            print "Exception @loadCommands : ", err
+
+        return 
+        
     def getPauseList( self ):
 
         return self.pause_list
 
     def get_process_list( self ):
 
-        self.commands = main.load_commands()
         out = process_list.getList()
         self.process_list = out.split( "\n" )
 
     def pause_processes( self ):
 
         self.get_process_list()
-
-        self.commands = main.load_commands()
         
         for process in self.process_list:
 
@@ -65,6 +84,11 @@ if __name__ == "__main__":
             pc.get_process_list()
             print "\n".join( pc.process_list )
         
+        elif sys.argv[1] == "-h":            
+            pc.pause_processes()
+            time.sleep( 3 )           
+            pc.resume_processes()
+
         else :
 
             print "\n".join( pc.getPauseList() )

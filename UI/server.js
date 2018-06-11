@@ -47,7 +47,7 @@ ipcMain.on('get-process-list', function(event, arg) {
 
     exec( "cd ../Backend/ && python process_control.py -l", function(error, stdout, stderr){ 
         process_list = stdout; 
-        console.log( stdout, error );
+        console.log( stdout, "errors : "+error );
 
         exec( "cd ../Backend/ && python process_control.py -p", function(error, stdout, stderr){ 
             pause_list = stdout; 
