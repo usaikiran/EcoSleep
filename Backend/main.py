@@ -27,7 +27,8 @@ try:
 
 except Exception as err:
 
-    import install_dependencies
+    pass
+    #import install_dependencies
 
 try:
 

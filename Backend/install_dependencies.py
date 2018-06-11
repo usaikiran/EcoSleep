@@ -24,6 +24,7 @@ cmds = [
 	"sudo pip install pillow" ,
 	"sudo pip install h5py" ,
 	"sudo pip install tensorflow" ,
+	"sudo pip install imutils" ,
 	"pip install keras" ,
 
 	"sudo apt install nodejs -y" ,
@@ -34,7 +35,8 @@ cmds = [
 	"npm list -g electron-ipc || npm i -g electron-ipc" , 
 	"npm list -g system-sleep || npm i -g system-sleep" , 
 
-	"sudo apt-get install wmctrl -y"
+	"sudo apt-get install wmctrl -y",
+	"sudo ln -s /usr/bin/nodejs /usr/bin/node"
 ]
 
 for cmd in cmds :
