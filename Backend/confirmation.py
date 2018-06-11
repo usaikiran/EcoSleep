@@ -56,16 +56,16 @@ class ConfirmFace():
         if len(faceList) != len(self.faceList) :
             self.faceList = self.getEARList( gray , faceList )
             self.counter = [0 for i in range( len(faceList) )]
+            return True
 
 
         newList = self.getEARList( gray , faceList )
-
         diff = 0
 
         for i in range(len(newList)) :
             diff = max (diff , abs(newList[i] - self.faceList[i]) )
 
-        diff = float("{:0.2f}".format(diff))
+        diff = float("{:0.3f}".format(diff))
 
         for i in range(len(newList)):
             if newList[i] < self.threshold :
@@ -73,14 +73,15 @@ class ConfirmFace():
             else :
 
                 if self.counter[i] >= self.consecFrames :
-                    print "blinked - face no." ,i  
+                    print "blinked - face no." ,i
+                    return True
 
                 self.counter[i] = 0
 
                 
         self.faceList = newList
 
-        print diff
+        return False
 
 
 

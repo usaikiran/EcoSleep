@@ -29,10 +29,16 @@ except Exception as err:
 
     import install_dependencies
 
+    import dlib
+    import cv2
+    import keyboard
+    from pynput import mouse
+    
 try:
 
     from detector import *
     import mouse_listener
+    import confirmation
     import process_control
 
 except Exception as err:

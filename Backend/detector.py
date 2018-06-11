@@ -42,23 +42,28 @@ class Detector:
 
 	def __init__( self ):
 
-		self.non_face_count = 0
-		self.wait_time = 3
-		self.detector = dlib.get_frontal_face_detector()	
-		self.fps = 15
-		self.scale = 1
-		self.wait_time = 3
+		try:
 
-		self.brightness_interval = 10
+			self.non_face_count = 0
+			self.wait_time = 3
+			self.detector = dlib.get_frontal_face_detector()	
+			self.fps = 15
+			self.scale = 1
+			self.wait_time = 3
 
-		with open( "../UI/data/settings.json" ) as fh:
-			data = json.loads( fh.read() )
-		
-		self.brightness_interval = int( data["brightness_interval"] )
-		self.fps = int( data["fps"] )
-		self.scale = float( data["scale"] )
-		self.wait_time = int( data["wait_time"] )
+			self.brightness_interval = 10
 
+			with open( "../UI/data/settings.json" ) as fh:
+				data = json.loads( fh.read() )
+			
+			self.brightness_interval = int( data["brightness_interval"] )
+			self.fps = int( data["fps"] )
+			self.scale = float( data["scale"] )
+			self.wait_time = int( data["wait_time"] )
+
+		except err as Exception:
+			
+			print "Exceptions caught @ __init__ : ", err
 
 	def changeFlag( self ):
 
@@ -93,7 +98,7 @@ class Detector:
 			auto_brightness_interval = int( self.brightness_interval/delay )
 			#monitor_state = 1
 
-			print delay, max_non_face_count, downsample_ratio
+			print " delay : ", delay, " max_non_face_count : ", max_non_face_count, " ratio : ", downsample_ratio
 
 			cam = cv2.VideoCapture( 0 )
 			start = time.time()
@@ -115,13 +120,11 @@ class Detector:
 						if self.non_face_count == 1:
 							print self.non_face_count, datetime.now()
 					
-					else :
-
-						if state() != 1:
-							#print "on"
-							on()
-							state( 1 )
-							self.non_face_count = 0
+					elif state() != 1:
+						#print "on"
+						on()
+						state( 1 )
+						self.non_face_count = 0
 
 					if self.non_face_count > max_non_face_count :
 						

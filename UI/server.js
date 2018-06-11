@@ -14,6 +14,10 @@ var mainWindow = null;
 
 const ipcMain = require('electron').ipcMain;
 
+exec( "./kill", function(error, stdout, stderr){ 
+    console.log( "stdout : "+stdout+" \nstderr : "+stderr );
+});
+
 ipcMain.on('get-stats', function(event, arg) {
 
     console.log( "\n@ipc-get-stats  args=[ "+arg+" ]" );
@@ -26,6 +30,7 @@ ipcMain.on('get-stats', function(event, arg) {
             state = parseFloat( ( stdout ) );
             if( state != 0.0 ) 
                 state = 1.0;
+            
             console.log( "interval : "+arg+" energy consumed : "+watts+" state : "+state );
             event.returnValue = watts+":"+state;
         });

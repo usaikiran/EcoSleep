@@ -5,7 +5,7 @@ var prev_active_icon = 0, active_frame=0;
 var iframe_src = [ "dashboard.html", "settings.html", "processes.html", "stats.html" ]
 
 var state = 0;
-var msg = [ "ACTIVATE", "DISABLE" ];
+var msg = [ "ENABLE", "DISABLE" ];
 
 function toggle()
 {
@@ -29,7 +29,7 @@ function onNavIconClick( id )
 
 window.onload = function()
 {
-    onNavIconClick( 2 );
+    onNavIconClick( 0 );
     $('[data-toggle="tooltip"]').tooltip();
     
     /*out = ipcRenderer.sendSync('brightness', 'get');
