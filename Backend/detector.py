@@ -46,7 +46,7 @@ class Detector:
 
 			self.non_face_count = 0
 			self.wait_time = 3
-			self.detector = dlib.get_frontal_face_detector()	
+			self.detector = dlib.get_frontal_face_detector()
 			self.fps = 15
 			self.scale = 1
 			self.wait_time = 3

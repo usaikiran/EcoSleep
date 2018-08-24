@@ -14,8 +14,8 @@ cmds = [
 	"sudo pip install dlib" ,
 	"sudo pip install imutils -y"
 
-	"sudo pip install keyboard" ,
-	"sudo pip install pynput" ,
+	"sudo pip install keyboard -y" ,
+	"sudo pip install pynput -y" ,
 
 	"sudo pip install opencv-python" , 
 
@@ -24,8 +24,7 @@ cmds = [
 	"sudo pip install pillow" ,
 	"sudo pip install h5py" ,
 	"sudo pip install tensorflow" ,
-	"sudo pip install imutils" ,
-	"pip install keras" ,
+	"sudo pip install keras" ,
 
 	"sudo apt install nodejs -y" ,
 	"sudo apt install npm -y" ,
@@ -33,10 +32,13 @@ cmds = [
 	"npm list -g http || npm i -g http" ,
 	"npm list -g net || npm i -g net" ,
 	"npm list -g electron-ipc || npm i -g electron-ipc" , 
-	"npm list -g system-sleep || npm i -g system-sleep" , 
+	"npm list -g system-sleep || npm i -g system-sleep" ,
 
 	"sudo apt-get install wmctrl -y",
-	"sudo ln -s /usr/bin/nodejs /usr/bin/node"
+	"sudo ln -s /usr/bin/nodejs /usr/bin/node",
+
+	"sudo apt-get install powerstat -y",
+	"sudo pip install pexpect"
 ]
 
 for cmd in cmds :

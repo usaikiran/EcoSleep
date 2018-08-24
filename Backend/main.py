@@ -181,7 +181,7 @@ if __name__ == "__main__":
     init()
 
     pc = process_control.ProcessControl()
-    #mouse = mouse_listener.MouseListener()
+    mouse = mouse_listener.MouseListener()
 
     if track_keyboard == True:
         keyboard.on_press( reset_monitor_state )
