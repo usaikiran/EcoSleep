@@ -35,10 +35,14 @@ average running power consumption of 7.63 Watts.
 The average power consumption statistics in a given state is as given below.
 
 ● Normal Usage - 12 Watts
+
 ● Extensive Usage - 15 Watts and greater
+
 ● Low Power Mode - 6 Watts
 
+
 Considering the below usage -
+
 Thirty minutes of inactivity starts the default sleep mechanism. The user is
 present for the first ten minutes and absent for the rest.
 
