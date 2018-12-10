@@ -46,8 +46,8 @@ Considering the below usage -
 Thirty minutes of inactivity starts the default sleep mechanism. The user is
 present for the first ten minutes and absent for the rest.
 
-Power saved = (Normal Consumption - Low Power Consumption) * Low PowerTime
+`Power saved = (Normal Consumption - Low Power Consumption) * Low PowerTime`
 Therefore,
-Power saved = (11.14 – 7.63) * (20 * 60) = 4212 Joules.
+`Power saved = (11.14 – 7.63) * (20 * 60) = 4212 Joules.`
 
-`Thus, 6 minutes of battery life would have been saved.`
+###### Thus, 6 minutes of battery life would have been saved.
