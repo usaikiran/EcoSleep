@@ -13,7 +13,7 @@ Normal usage scenario is exhibited when applications such as Games and
 Media players are not running. Figure below shows the average running power
 consumption of 11.14 Watts.
 
-!(Screenshots/performance_analysis_1.png)
+![Image not found](Screenshots/performance_analysis_1.png)
 
 
 ### Average Power Consumption - Running Media Applications
@@ -21,7 +21,7 @@ High Power usage scenario is exhibited when applications such as Games and
 Media players are running. Figure below shows the average running power consumption
 of 15.86 Watts.
 
-!(Screenshots/performance_analysis_5.png)
+![Image not found](Screenshots/performance_analysis_5.png)
 
 
 ### Average Power Consumption - Low Power Mode
@@ -29,7 +29,7 @@ Low Power usage scenario is exhibited when the user is not present and all the
 selected processes are paused and the display unit is turned off. Figure below shows the
 average running power consumption of 7.63 Watts.
 
-!(Screenshots/performance_analysis_3.png)
+![Image not found](Screenshots/performance_analysis_3.png)
 
 
 The average power consumption statistics in a given state is as given below.
