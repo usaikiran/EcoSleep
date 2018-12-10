@@ -7,4 +7,5 @@ res = os.popen("ps aux | grep python | grep main.py | awk '{ print $2 }'").read(
 print res
 
 for pid in res :
-    os.system("sudo kill -KILL " + pid)
+    os.system("sudo kill -9 " + pid)
+    print "sudo kill -9 " + pid

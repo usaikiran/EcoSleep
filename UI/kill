@@ -3,4 +3,4 @@
 from subprocess import Popen, PIPE
 import os
 
-print os.popen("cd ../Backend && echo password | sudo -S python kill_process.py", 'w')
+print os.popen("cd ../Backend && echo creations | sudo -S python kill_process.py", 'w')

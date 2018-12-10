@@ -4,4 +4,4 @@ from subprocess import Popen, PIPE
 import os
 import pexpect
 
-print os.popen("cd ../Backend && echo password | sudo -S python main.py", 'w')
+print os.popen("cd ../Backend && echo creations | sudo -S python main.py", 'w')

@@ -38,7 +38,8 @@ cmds = [
 	"sudo ln -s /usr/bin/nodejs /usr/bin/node",
 
 	"sudo apt-get install powerstat -y",
-	"sudo pip install pexpect"
+	"sudo pip install pexpect",
+	"sudo pip install imutils"
 ]
 
 for cmd in cmds :
